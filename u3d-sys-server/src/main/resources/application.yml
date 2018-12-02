@@ -1,0 +1,31 @@
+server:
+  port: 9001
+  contextPath: /rest/sys
+  
+spring:
+  application:
+    name: u3d-sys-server
+  cloud:
+    config:
+      failFast: true
+      uri: http://127.0.0.1:8888/
+      name: u3d-common
+      profile: default
+    
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+  client:
+    serverUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    healthcheck:
+      enabled: true
+      
+endpoints:
+  enabled: false
+  info:
+    enabled: true
+  health:
+    enabled: true
