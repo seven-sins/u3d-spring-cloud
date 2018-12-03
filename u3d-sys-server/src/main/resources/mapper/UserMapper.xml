@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 用户mybatis映射文件 -->
+<mapper namespace="com.u3d.sys.mapper.UserMapper">
+    <resultMap id="userRM" type="com.u3d.po.sys.User">
+        <id property="userId" column="user_id" />
+        <result property="userName" column="user_name" />
+        <result property="nickName" column="nick_name" />
+        <result property="password" column="password" />
+        <result property="sex" column="sex" />
+        <result property="createTime" column="create_time" />
+        <result property="createUserId" column="create_user_id" />
+        <result property="updateTime" column="update_time" />
+        <result property="updateUserId" column="update_user_id" />
+    </resultMap>
+
+    <select id="find" parameterType="com.u3d.po.sys.User" resultMap="userRM">
+        SELECT 
+        	a.user_id, a.user_name, a.nick_name, a.password, a.sex, a.create_time, a.create_user_id, a.update_time, a.update_user_id
+        FROM sys_user a
+    </select>
+    
+    <select id="get" parameterType="string" resultMap="userRM">
+        SELECT 
+        	a.user_id, a.user_name, a.nick_name, a.password, a.sex, a.create_time, a.create_user_id, a.update_time, a.update_user_id
+        FROM sys_user a
+        WHERE a.user_id = #{userId}
+    </select>
+    
+    <insert id="insert" parameterType="com.u3d.po.sys.User" >
+		insert into sys_user
+			(	
+				user_id,
+				user_name,
+				nick_name,
+				password,
+				sex,
+				create_time,
+				create_user_id,
+				update_time,
+				update_user_id
+			)
+		values
+			(	
+				#{userId},
+			 	#{userName},
+			 	#{nickName},
+			 	#{password},
+			 	#{sex},
+			 	#{createTime},
+			 	#{createUserId},
+			 	#{updateTime},
+			 	#{updateUserId}
+	 	     )
+	</insert>
+	
+	<update id="update" parameterType="com.u3d.po.sys.User" >
+		update sys_user
+		<set>
+			<if test="userName != null">
+				user_name = #{userName},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName},
+			</if>
+			<if test="password != null">
+				password = #{password},
+			</if>
+			<if test="sex != null">
+				sex = #{sex},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime},
+			</if>
+			<if test="createUserId != null">
+				create_user_id = #{createUserId},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime},
+			</if>
+			<if test="updateUserId != null">
+				update_user_id = #{updateUserId}
+			</if>
+		</set>
+		where user_id = #{userId}
+	</update>
+	
+	<delete id="deleteById" parameterType="string">
+		delete from sys_user
+		where user_id = #{userId}
+	</delete>
+	
+	<delete id="delete" parameterType="string">
+		delete from sys_user
+		where user_id in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+</mapper> 

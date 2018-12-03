@@ -1,16 +1,6 @@
 server:
   port: 9001
   contextPath: /rest/sys
-  
-spring:
-  application:
-    name: u3d-sys-server
-  cloud:
-    config:
-      failFast: true
-      uri: http://127.0.0.1:8888/
-      name: u3d-common
-      profile: default
     
 eureka:
   instance:
@@ -22,6 +12,16 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:8761/eureka/
     healthcheck:
       enabled: true
+  
+spring:
+  application:
+    name: u3d-sys-server
+  cloud:
+    config:
+      failFast: true
+      uri: http://127.0.0.1:8888/
+      name: database-sys
+      profile: default
       
 endpoints:
   enabled: false

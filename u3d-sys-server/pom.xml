@@ -24,10 +24,26 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-client</artifactId>
+		</dependency>
+			
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.u3d</groupId>
+			<artifactId>u3d-common-utils</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.u3d</groupId>
+			<artifactId>u3d-object</artifactId>
+		</dependency>
+		
 	</dependencies>
 	
 	<build>
